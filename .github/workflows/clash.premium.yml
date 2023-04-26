@@ -20,7 +20,7 @@ jobs:
       - name: Initialization environment
         id: init
         run: |
-          echo "image_name=${{ github.repository }}" >> $GITHUB_OUTPUT 
+          echo "image_name=fengdingwen/clash" >> $GITHUB_OUTPUT 
           echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
           echo "platform=linux/arm64,linux/amd64" >> $GITHUB_OUTPUT
 
