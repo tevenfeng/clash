@@ -42,8 +42,23 @@ function setIptables(){
   echo "[init] iptables: done."
 }
 
+function downloadConfig() {
+  if ! [ -x "$(command -v curl)" ]; then
+    echo "[init] package: installing curl..."
+    apk add --update --no-cache -q curl
+    echo "[init] package: done."
+  else
+    echo '[init] package: curl has been installed.'
+  fi
+
+  echo "[init] config: downloading config file from $CONFIG_URL"
+  curl -L $CONFIG_URL -o /clash/config.yaml
+  echo "[init] config: download completed."
+}
+
 function initApp() {
   echo "====================== clash.service ========================"
+  downloadConfig
   echo "[init] executing container initialization scripts..."
   if [ $ENHANCED_MODE ]; then
       echo "[init] mode: enable transparent proxies mode."
